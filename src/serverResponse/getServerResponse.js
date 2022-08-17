@@ -6,14 +6,17 @@ const getServerResponse = (q, page, isVideo = "") => {
 
   const query =
     isVideo !== "videos"
-      ? `${beginStr}?key=${apiKey}&q=${q}&image_type=photo&orientation=horizontal&per_page=${
-          12 * page
-        }`
-      : `${beginStr}?key=${apiKey}&q=${q}&video_type=all&per_page=${12 * page}`;
-  return axios.get(query).then((res) => {
-    return res.data.hits;
-  });
-  // .catch(console.error());
+      ? `${beginStr}?key=${apiKey}&q=${q}&image_type=photo&orientation=horizontal&page=${page}&per_page=${12}`
+      : `${beginStr}?key=${apiKey}&q=${q}&video_type=all&page=${page}&per_page=${12}`;
+  return axios
+    .get(query)
+    .then((res) => {
+      return res.data.hits;
+    })
+    .catch((error) => {
+      console.log(error);
+      return "error";
+    });
   // .finally((data) => {
   //   console.log(data.hits);
   //   return data.hits;

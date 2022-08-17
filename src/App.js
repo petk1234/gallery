@@ -17,6 +17,7 @@ export default class App extends Component {
       page: 1,
       input: "",
       isLoading: false,
+      error: "",
     };
   }
   handleClickInput = (input_, type) => {
@@ -26,7 +27,11 @@ export default class App extends Component {
       console.log(data);
       if (data[0].type === "photo") {
         console.log("p h o t o");
-        this.setState({ pictures: data, videos: [], isLoading: false });
+        this.setState({
+          pictures: data,
+          videos: [],
+          isLoading: false,
+        });
       } else {
         console.log("oruuu");
         this.setState({ pictures: [], videos: data, isLoading: false });
@@ -42,14 +47,22 @@ export default class App extends Component {
     if (this.state.pictures.length !== 0) {
       getServerResponse(this.state.input, pagee, "Images").then((data) => {
         console.log(data);
-        this.setState({ pictures: data });
+        this.setState((prevState) => {
+          return { pictures: prevState.pictures.concat(data) };
+        });
         setTimeout(() => this.setState({ isLoading: false }), 1000);
       });
     } else {
       getServerResponse(this.state.input, pagee, "Videos").then((data) => {
         console.log(data);
-        this.setState({ videos: data });
-        setTimeout(() => this.setState({ isLoading: false }), 1000);
+        if (data !== "error") {
+          this.setState((prevState) => {
+            return { videos: prevState.videos.concat(data) };
+          });
+          setTimeout(() => this.setState({ isLoading: false }), 1000);
+        } else {
+          this.setState({ error: data });
+        }
       });
     }
   };
@@ -75,7 +88,7 @@ export default class App extends Component {
           ) : (
             <VideoGallery videos={this.state.videos}></VideoGallery>
           )}
-          {this.state.isLoading === "add" && (
+          {this.state.isLoading === "add" && this.state.error === "" && (
             <>
               <Loader></Loader>
             </>
