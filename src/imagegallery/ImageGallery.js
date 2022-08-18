@@ -9,12 +9,9 @@ export default class ImageGallery extends Component {
     this.state = {};
   }
   render() {
-    console.log("imagGaleery");
-    console.log(this.props.pictures.length);
     let children = this.props.children;
     return (
       <>
-        {/* {this.props.pictures.length !== 0 ? ( */}
         <ul className={styles.gallery}>
           {this.props.pictures.map((picture) => (
             <ImageContext.Provider key={picture.id} value={picture}>

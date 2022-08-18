@@ -24,7 +24,6 @@ export default class Searchbar extends Component {
   };
   handleClick = (e) => {
     e.preventDefault();
-    console.log(this.state.type, this.state.input);
     if (this.state.type === "Images") {
       this.props.onClickInput(this.state.input, "Images");
     } else {
@@ -54,7 +53,7 @@ export default class Searchbar extends Component {
               type="submit"
               onClick={this.handleClick}
             ></button>
-            <SearchbarContext.Provider value={{ djj: this.handleType }}>
+            <SearchbarContext.Provider value={{ handleType: this.handleType }}>
               <input
                 className={styles.form__searchbar}
                 type="text"
@@ -62,7 +61,7 @@ export default class Searchbar extends Component {
                 onChange={this.handleChange}
                 autoComplete="off"
                 autoFocus
-                placeholder="Search images and photos"
+                placeholder={`Search ${this.state.type.toLowerCase()}`}
               />
               <button
                 className={styles.form__button}

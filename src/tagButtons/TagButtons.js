@@ -7,19 +7,16 @@ class TagButtons extends Component {
   };
   componentDidMount = () => {
     const { contextImage: data } = this.props;
-    console.log(data);
     let tagsArr = data.tags.split(", ");
-    console.log(tagsArr);
     this.setState({
       tags: this.state.tags.concat(tagsArr),
     });
   };
   handleTag = (e) => {
-    console.log("dsdd");
     if (this.props.contextImage.type !== "photo") {
-      this.props.contextUser.dj(e.target.name, "videos");
+      this.props.contextUser.handleClickInput(e.target.name, "videos");
     } else {
-      this.props.contextUser.dj(e.target.name);
+      this.props.contextUser.handleClickInput(e.target.name);
     }
   };
   render() {

@@ -18,23 +18,35 @@ export default class App extends Component {
       input: "",
       isLoading: false,
       error: "",
+      counter: 0,
     };
   }
+  loadedCounter = () => {
+    this.setState((prevState) => {
+      return { counter: prevState.counter + 1 };
+    });
+  };
   handleClickInput = (input_, type) => {
-    console.log("dd");
     this.setState({ isLoading: "initial", input: input_, page: 1 });
     getServerResponse(input_, 1, type).then((data) => {
-      console.log(data);
-      if (data[0].type === "photo") {
-        console.log("p h o t o");
-        this.setState({
-          pictures: data,
-          videos: [],
-          isLoading: false,
-        });
+      if (data.length !== 0) {
+        if (data[0].type === "photo") {
+          this.setState({
+            pictures: data,
+            videos: [],
+            isLoading: false,
+            counter: 0,
+          });
+        } else {
+          this.setState({
+            pictures: [],
+            videos: data,
+            isLoading: false,
+            counter: 0,
+          });
+        }
       } else {
-        console.log("oruuu");
-        this.setState({ pictures: [], videos: data, isLoading: false });
+        this.setState({ pictures: [], videos: [] });
       }
     });
   };
@@ -46,18 +58,26 @@ export default class App extends Component {
     }));
     if (this.state.pictures.length !== 0) {
       getServerResponse(this.state.input, pagee, "Images").then((data) => {
-        console.log(data);
         this.setState((prevState) => {
-          return { pictures: prevState.pictures.concat(data) };
+          const prevIds = prevState.pictures.map((picture) => picture.id);
+          const notDoubleImage = data.filter(
+            (picture) => prevIds.indexOf(picture.id) === -1
+          );
+          return {
+            pictures: prevState.pictures.concat(notDoubleImage),
+          };
         });
         setTimeout(() => this.setState({ isLoading: false }), 1000);
       });
     } else {
       getServerResponse(this.state.input, pagee, "Videos").then((data) => {
-        console.log(data);
         if (data !== "error") {
           this.setState((prevState) => {
-            return { videos: prevState.videos.concat(data) };
+            const prevIds = prevState.videos.map((video) => video.id);
+            const notDoubleVideo = data.filter(
+              (video) => prevIds.indexOf(video.id) === -1
+            );
+            return { videos: prevState.videos.concat(notDoubleVideo) };
           });
           setTimeout(() => this.setState({ isLoading: false }), 1000);
         } else {
@@ -67,35 +87,44 @@ export default class App extends Component {
     }
   };
   render() {
-    console.log(this.state.pictures);
-    console.log(this.state.videos);
+    const { pictures, videos, page, input, isLoading, error, counter } =
+      this.state;
     return (
       <div className={styles.appContainer}>
         <UserContext.Provider
           value={{
-            dj: this.handleClickInput,
+            handleClickInput: this.handleClickInput,
+            loadedCounter: this.loadedCounter,
           }}
         >
-          <Searchbar
-            onClickInput={this.handleClickInput}
-            input={this.state.input}
-          ></Searchbar>
-          {this.state.isLoading === "initial" ? (
+          <Searchbar onClickInput={this.handleClickInput} input={input} />
+          {isLoading === "initial" &&
+          (pictures.length > 0 || videos.length > 0) ? (
             <Loader />
-          ) : this.state.pictures.length > 0 &&
-            this.state.videos.length === 0 ? (
-            <ImageGallery pictures={this.state.pictures} />
+          ) : pictures.length > 0 && videos.length === 0 ? (
+            <ImageGallery pictures={pictures} />
+          ) : pictures.length === 0 && videos.length > 0 ? (
+            <VideoGallery videos={videos} />
           ) : (
-            <VideoGallery videos={this.state.videos}></VideoGallery>
+            isLoading === "initial" && (
+              <p>Sorry, we couldn't find any matches for '{input}'</p>
+            )
           )}
-          {this.state.isLoading === "add" && this.state.error === "" && (
+          {isLoading === "add" && error === "" && (
             <>
-              <Loader></Loader>
+              <Loader />
             </>
           )}
-          {(this.state.pictures.length > 0 || this.state.videos.length > 0) &&
-            this.state.isLoading !== "add" && (
-              <Button onClickAdd={this.handleClickAdd}></Button>
+          {(pictures.length > 0 || videos.length > 0) &&
+            isLoading !== "add" &&
+            isLoading !== "initial" && (
+              <Button
+                page={page}
+                videos={videos}
+                pictures={pictures}
+                counter={counter}
+                onClickAdd={this.handleClickAdd}
+              />
             )}
         </UserContext.Provider>
       </div>

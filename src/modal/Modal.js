@@ -18,19 +18,7 @@ export default class Modal extends Component {
     }
   };
   componentDidMount = () => {
-    document.addEventListener(
-      "keydown",
-      this.closeModal
-      //   if (e. === 27) {
-      //     e.preventDefault();
-      //     return this.closeModal;
-      //   }
-    );
-    // console.log("esc");
-    // if (e.keyCode === 27) {
-    //   e.preventDefault();
-    //   this.props.deactiveModal();
-    // }
+    document.addEventListener("keydown", this.closeModal);
   };
   render() {
     return (
