@@ -1,6 +1,7 @@
 import withContext from "../withContext";
 import { Component } from "react";
 import styles from "../galleryEl/imageGallery.module.scss";
+import PropTypes, { array } from "prop-types";
 class TagButtons extends Component {
   state = {
     tags: [],
@@ -37,4 +38,10 @@ class TagButtons extends Component {
     );
   }
 }
+TagButtons.propTypes = {
+  contextUser: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.func])),
+  contextImage: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.object])
+  ),
+};
 export default withContext(withContext(TagButtons, "user"), "data");

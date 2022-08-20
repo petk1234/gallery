@@ -1,5 +1,6 @@
 import { Component } from "react";
 import styles from "./modal.module.css";
+import PropTypes, { array } from "prop-types";
 export default class Modal extends Component {
   constructor() {
     super();
@@ -30,3 +31,7 @@ export default class Modal extends Component {
     );
   }
 }
+Modal.propTypes = {
+  url: PropTypes.string,
+  deactiveModal: PropTypes.func,
+};

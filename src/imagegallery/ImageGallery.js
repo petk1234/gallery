@@ -1,15 +1,17 @@
 import { Component } from "react";
+import { PureComponent } from "react";
 import ImageGalleryItem from "../galleryEl/ImageGalleryItem";
 import React from "react";
 import styles from "./gallery.module.scss";
+import PropTypes, { array } from "prop-types";
 export const ImageContext = React.createContext();
-export default class ImageGallery extends Component {
+export default class ImageGallery extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
-    let children = this.props.children;
+    console.log("image gallery");
     return (
       <>
         <ul className={styles.gallery}>
@@ -26,3 +28,14 @@ export default class ImageGallery extends Component {
     );
   }
 }
+ImageGallery.propTypes = {
+  pictures: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+        PropTypes.object,
+      ])
+    )
+  ),
+};

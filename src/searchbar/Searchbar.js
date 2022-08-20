@@ -1,9 +1,11 @@
 import { Component } from "react";
+import { PureComponent } from "react";
 import Buttons from "../buttons/Buttons";
 import styles from "./searchbar.module.scss";
 import React from "react";
+import PropTypes, { array } from "prop-types";
 export const SearchbarContext = React.createContext();
-export default class Searchbar extends Component {
+export default class Searchbar extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,8 +46,9 @@ export default class Searchbar extends Component {
     }
   };
   render() {
+    // console.log("searchbar");
     return (
-      <header className={styles.header}>
+      <header id="#header" className={styles.header}>
         <div className={styles.container}>
           <form className={styles.form}>
             <button
@@ -77,3 +80,7 @@ export default class Searchbar extends Component {
     );
   }
 }
+Searchbar.propTypes = {
+  onClickInput: PropTypes.func,
+  input: PropTypes.string,
+};

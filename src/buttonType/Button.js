@@ -1,5 +1,6 @@
 import { SearchbarContext } from "../searchbar/Searchbar";
 import styles from "../searchbar/searchbar.module.scss";
+import PropTypes, { array } from "prop-types";
 function Button(props) {
   const { buttonValue } = props;
   return (
@@ -21,4 +22,7 @@ function Button(props) {
     </SearchbarContext.Consumer>
   );
 }
+Button.propTypes = {
+  buttonValue: PropTypes.string,
+};
 export default Button;

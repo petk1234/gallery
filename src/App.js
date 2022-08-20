@@ -65,9 +65,9 @@ export default class App extends Component {
           );
           return {
             pictures: prevState.pictures.concat(notDoubleImage),
+            isLoading: false,
           };
         });
-        setTimeout(() => this.setState({ isLoading: false }), 1000);
       });
     } else {
       getServerResponse(this.state.input, pagee, "Videos").then((data) => {
@@ -77,9 +77,12 @@ export default class App extends Component {
             const notDoubleVideo = data.filter(
               (video) => prevIds.indexOf(video.id) === -1
             );
-            return { videos: prevState.videos.concat(notDoubleVideo) };
+            return {
+              videos: prevState.videos.concat(notDoubleVideo),
+              // videos: notDoubleVideo,
+              isLoading: false,
+            };
           });
-          setTimeout(() => this.setState({ isLoading: false }), 1000);
         } else {
           this.setState({ error: data });
         }
@@ -89,6 +92,16 @@ export default class App extends Component {
   render() {
     const { pictures, videos, page, input, isLoading, error, counter } =
       this.state;
+
+    const initLoaderCond =
+      isLoading === "initial" && (pictures.length > 0 || videos.length > 0);
+    const imgGallCond = pictures.length > 0 && videos.length === 0;
+    const videoGallCond = pictures.length === 0 && videos.length > 0;
+    const addLoaderCond = isLoading === "add" && error === "";
+    const loadButtonCond =
+      (pictures.length > 0 || videos.length > 0) &&
+      isLoading !== "add" &&
+      isLoading !== "initial";
     return (
       <div className={styles.appContainer}>
         <UserContext.Provider
@@ -98,34 +111,27 @@ export default class App extends Component {
           }}
         >
           <Searchbar onClickInput={this.handleClickInput} input={input} />
-          {isLoading === "initial" &&
-          (pictures.length > 0 || videos.length > 0) ? (
+          {initLoaderCond ? (
             <Loader />
-          ) : pictures.length > 0 && videos.length === 0 ? (
+          ) : imgGallCond ? (
             <ImageGallery pictures={pictures} />
-          ) : pictures.length === 0 && videos.length > 0 ? (
+          ) : videoGallCond ? (
             <VideoGallery videos={videos} />
           ) : (
             isLoading === "initial" && (
               <p>Sorry, we couldn't find any matches for '{input}'</p>
             )
           )}
-          {isLoading === "add" && error === "" && (
-            <>
-              <Loader />
-            </>
+          {addLoaderCond && <Loader />}
+          {loadButtonCond && (
+            <Button
+              page={page}
+              videos={videos}
+              pictures={pictures}
+              counter={counter}
+              onClickAdd={this.handleClickAdd}
+            />
           )}
-          {(pictures.length > 0 || videos.length > 0) &&
-            isLoading !== "add" &&
-            isLoading !== "initial" && (
-              <Button
-                page={page}
-                videos={videos}
-                pictures={pictures}
-                counter={counter}
-                onClickAdd={this.handleClickAdd}
-              />
-            )}
         </UserContext.Provider>
       </div>
     );

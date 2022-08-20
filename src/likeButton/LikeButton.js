@@ -1,6 +1,7 @@
 import { Component } from "react";
 import styles from "../galleryEl/imageGallery.module.scss";
 import withContext from "../withContext";
+import PropTypes, { array } from "prop-types";
 class LikeButton extends Component {
   state = {
     likes: this.props.contextImage.likes,
@@ -24,4 +25,9 @@ class LikeButton extends Component {
     );
   }
 }
+LikeButton.propTypes = {
+  contextImage: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.object])
+  ),
+};
 export default withContext(LikeButton, "data");

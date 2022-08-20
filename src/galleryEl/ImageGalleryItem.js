@@ -1,10 +1,11 @@
 import { Component } from "react";
 import Modal from "../modal/Modal";
 import React from "react";
-import Loader from "../loader/Loader";
 import styles from "./imageGallery.module.scss";
 import ImageInfoContainer from "../imageInfoContainer/ImageInfoContainer";
 import withContext from "../withContext";
+import ContentLoader from "../contentLoader/ContentLoader";
+import PropTypes, { array } from "prop-types";
 class ImageGalleryItem extends Component {
   constructor(props) {
     super(props);
@@ -33,21 +34,22 @@ class ImageGalleryItem extends Component {
         />
         <ImageInfoContainer />
         {this.state.modal === true && (
-          <Modal
-            url={picture.webformatURL}
-            deactiveModal={this.toggleModal}
-          ></Modal>
+          <Modal url={picture.webformatURL} deactiveModal={this.toggleModal} />
         )}
-        {this.state.isLoaded === false && (
-          <div className={styles.div}>
-            Is Loading...
-            <div className={styles.divDiv}>
-              <Loader />
-            </div>
-          </div>
-        )}
+        {this.state.isLoaded === false && <ContentLoader />}
       </li>
     );
   }
 }
+ImageGalleryItem.propTypes = {
+  picture: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string,
+      PropTypes.object,
+      PropTypes.func,
+      PropTypes.array,
+    ])
+  ),
+};
 export default withContext(ImageGalleryItem, "user");
