@@ -22,7 +22,7 @@ class ImageGalleryItem extends Component {
     this.props.contextUser.loadedCounter();
   };
   render() {
-    const { picture } = this.props;
+    const { contextImage: picture } = this.props;
     return (
       <li className={styles.galleryItem}>
         <img
@@ -52,4 +52,4 @@ ImageGalleryItem.propTypes = {
     ])
   ),
 };
-export default withContext(ImageGalleryItem, "user");
+export default withContext(withContext(ImageGalleryItem, "user"), "data");

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import styles from "../galleryEl/imageGallery.module.scss";
+import styles from "./likeButton.module.scss";
 import withContext from "../withContext";
 import PropTypes, { array } from "prop-types";
 class LikeButton extends Component {
@@ -16,8 +16,8 @@ class LikeButton extends Component {
   render() {
     const classChanger =
       this.props.contextImage.likes === this.state.likes
-        ? `${styles.galleryItem__like} ${styles.notActive}`
-        : `${styles.galleryItem__like} ${styles.active} `;
+        ? `${styles.like} ${styles.notActive}`
+        : `${styles.like} ${styles.active} `;
     return (
       <button className={classChanger} onClick={this.counterIncrement}>
         {this.state.likes}

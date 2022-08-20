@@ -2,6 +2,7 @@ import { Component } from "react";
 import Searchbar from "./searchbar/Searchbar";
 import ImageGallery from "./imagegallery/ImageGallery";
 import VideoGallery from "./videoGallery/VideoGallery";
+import Gallery from "./gallery/Gallery";
 import Button from "./button/Button";
 import Loader from "./loader/Loader";
 import getServerResponse from "./serverResponse/getServerResponse";
@@ -95,8 +96,6 @@ export default class App extends Component {
 
     const initLoaderCond =
       isLoading === "initial" && (pictures.length > 0 || videos.length > 0);
-    const imgGallCond = pictures.length > 0 && videos.length === 0;
-    const videoGallCond = pictures.length === 0 && videos.length > 0;
     const addLoaderCond = isLoading === "add" && error === "";
     const loadButtonCond =
       (pictures.length > 0 || videos.length > 0) &&
@@ -113,14 +112,10 @@ export default class App extends Component {
           <Searchbar onClickInput={this.handleClickInput} input={input} />
           {initLoaderCond ? (
             <Loader />
-          ) : imgGallCond ? (
-            <ImageGallery pictures={pictures} />
-          ) : videoGallCond ? (
-            <VideoGallery videos={videos} />
+          ) : isLoading === "initial" ? (
+            <p>Sorry, we couldn't find any matches for '{input}'</p>
           ) : (
-            isLoading === "initial" && (
-              <p>Sorry, we couldn't find any matches for '{input}'</p>
-            )
+            <Gallery pictures={pictures} videos={videos} />
           )}
           {addLoaderCond && <Loader />}
           {loadButtonCond && (

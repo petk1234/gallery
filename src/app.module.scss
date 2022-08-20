@@ -1,6 +1,9 @@
 .appContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+}
+p {
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
 }

@@ -1,6 +1,6 @@
 import withContext from "../withContext";
 import { Component } from "react";
-import styles from "../galleryEl/imageGallery.module.scss";
+import styles from "./tagButtons.module.scss";
 import PropTypes, { array } from "prop-types";
 class TagButtons extends Component {
   state = {
@@ -22,14 +22,10 @@ class TagButtons extends Component {
   };
   render() {
     return (
-      <ul className={styles.galleryItem__tagsContainer}>
+      <ul className={styles.tagsContainer}>
         {this.state.tags.map((tag) => (
-          <li key={tag} className={styles.galleryItem__tagItem}>
-            <button
-              className={styles.galleryItem__tag}
-              name={tag}
-              onClick={this.handleTag}
-            >
+          <li key={tag} className={styles.tagItem}>
+            <button className={styles.tag} name={tag} onClick={this.handleTag}>
               {tag}
             </button>
           </li>

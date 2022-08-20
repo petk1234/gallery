@@ -1,0 +1,25 @@
+.tagsContainer {
+  list-style: none;
+  display: block;
+  padding: 0;
+}
+.tagItem {
+  display: inline;
+  &:not(:last-child) .galleryItem__tag {
+    margin-right: 5px;
+  }
+}
+.tag {
+  background: transparent;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: break-word;
+  max-width: 95px;
+  border: none;
+  border-radius: 4px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}

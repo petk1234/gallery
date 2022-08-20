@@ -1,5 +1,5 @@
 import { UserContext } from "./App";
-import { ImageContext } from "./imagegallery/ImageGallery";
+import { GalleryContext } from "./gallery/Gallery";
 const withContext = (WrappedComponent, typeConsumer) => {
   return function withContext(props) {
     return (
@@ -10,11 +10,11 @@ const withContext = (WrappedComponent, typeConsumer) => {
           </UserContext.Consumer>
         )}
         {typeConsumer === "data" && (
-          <ImageContext.Consumer>
+          <GalleryContext.Consumer>
             {(context) => (
               <WrappedComponent {...props} contextImage={context} />
             )}
-          </ImageContext.Consumer>
+          </GalleryContext.Consumer>
         )}
       </>
     );
