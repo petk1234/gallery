@@ -1,6 +1,6 @@
 import { SearchbarContext } from "../searchbar/Searchbar";
 import styles from "../searchbar/searchbar.module.scss";
-import PropTypes, { array } from "prop-types";
+import PropTypes from "prop-types";
 function Button(props) {
   const { buttonValue } = props;
   return (

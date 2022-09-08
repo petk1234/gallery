@@ -1,8 +1,8 @@
 import React from "react";
 import { Component } from "react";
 import { PureComponent } from "react";
-import withContext from "../withContext";
-import baseVideo from "../videos/index.mp4";
+import withContext from "../../withContext";
+import baseVideo from "../../videos/index.mp4";
 import styles_ from "../videoGalleryEl/videoGalleryEl.module.scss";
 import PropTypes, { array } from "prop-types";
 class Video extends Component {
@@ -30,12 +30,9 @@ class Video extends Component {
   };
   render() {
     const { contextImage: video, reference } = this.props;
-    // console.log(video.videos);
-    console.log("I rerendered rerendered rerendered", video.id);
     return (
       <>
         <video
-          // controlsList="nodownload"
           ref={reference}
           className={styles_.video}
           width={video.videos.tiny.width}

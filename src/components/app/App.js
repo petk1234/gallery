@@ -1,11 +1,9 @@
 import { Component } from "react";
-import Searchbar from "./searchbar/Searchbar";
-import ImageGallery from "./imagegallery/ImageGallery";
-import VideoGallery from "./videoGallery/VideoGallery";
-import Gallery from "./gallery/Gallery";
-import Button from "./button/Button";
-import Loader from "./loader/Loader";
-import getServerResponse from "./serverResponse/getServerResponse";
+import Searchbar from "../searchbar/Searchbar";
+import Gallery from "../gallery/Gallery";
+import Button from "../button/Button";
+import Loader from "../loader/Loader";
+import getServerResponse from "../../serverResponse/getServerResponse";
 import React from "react";
 import styles from "./app.module.scss";
 export const UserContext = React.createContext();
@@ -80,7 +78,6 @@ export default class App extends Component {
             );
             return {
               videos: prevState.videos.concat(notDoubleVideo),
-              // videos: notDoubleVideo,
               isLoading: false,
             };
           });

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import styles from "./likeButton.module.scss";
-import withContext from "../withContext";
+import withContext from "../../withContext";
 import PropTypes, { array } from "prop-types";
 class LikeButton extends Component {
   state = {

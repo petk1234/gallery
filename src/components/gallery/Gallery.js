@@ -5,7 +5,6 @@ import ImageGalleryItem from "../galleryEl/ImageGalleryItem";
 import PropTypes from "prop-types";
 export const GalleryContext = React.createContext();
 function Gallery({ pictures, videos }) {
-  // console.log("I rerendered");
   const contents =
     pictures.length > 0 && videos.length === 0 ? pictures : videos;
   const ContentComponent =

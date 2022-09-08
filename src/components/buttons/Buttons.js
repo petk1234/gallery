@@ -4,7 +4,6 @@ import React from "react";
 import PropTypes, { array } from "prop-types";
 function Buttons(props) {
   const buttonValues = ["Images", "Videos"];
-  console.log("Radio Buttons");
   return (
     <ul
       className={

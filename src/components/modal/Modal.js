@@ -7,7 +7,6 @@ export default class Modal extends Component {
     this.state = {};
   }
   closeModal = (e) => {
-    console.log(e);
     if (e.keyCode === 27) {
       this.props.deactiveModal();
       document.removeEventListener("keydown", this.closeModal);

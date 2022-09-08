@@ -1,5 +1,5 @@
-import { UserContext } from "./App";
-import { GalleryContext } from "./gallery/Gallery";
+import { UserContext } from "./components/app/App";
+import { GalleryContext } from "./components/gallery/Gallery";
 const withContext = (WrappedComponent, typeConsumer) => {
   return function withContext(props) {
     return (

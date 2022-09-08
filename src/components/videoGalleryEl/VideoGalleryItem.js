@@ -4,8 +4,8 @@ import React from "react";
 import styles from "../galleryEl/imageGallery.module.scss";
 import ImageInfoContainer from "../imageInfoContainer/ImageInfoContainer";
 import Video from "../video/Video";
-import withContext from "../withContext";
-import failedVideo from "../images/galleryItem/loadFailure.png";
+import withContext from "../../withContext";
+import failedVideo from "../../images/galleryItem/loadFailure.png";
 import PropTypes, { array } from "prop-types";
 import ContentLoader from "../contentLoader/ContentLoader";
 class VideoGalleryItem extends Component {
@@ -53,7 +53,6 @@ class VideoGalleryItem extends Component {
     }
   };
   render() {
-    console.log("I rerendered rerendered", this.props.kkk);
     return (
       <>
         {this.state.shouldBeRendered === true ? (

@@ -11,7 +11,7 @@
 .notActive {
   &::before {
     content: "";
-    background-image: url("../images/galleryItem/noLike.png");
+    background-image: url("../../images/galleryItem/noLike.png");
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -19,13 +19,13 @@
     margin-right: 5px;
   }
   &:hover::before {
-    background-image: url("../images/galleryItem/like.png");
+    background-image: url("../../images/galleryItem/like.png");
   }
 }
 .active {
   &::before {
     content: "";
-    background-image: url("../images/galleryItem/like.png");
+    background-image: url("../../images/galleryItem/like.png");
     display: inline-block;
     width: 20px;
     height: 20px;

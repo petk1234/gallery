@@ -46,7 +46,6 @@ export default class Searchbar extends PureComponent {
     }
   };
   render() {
-    // console.log("searchbar");
     return (
       <header id="#header" className={styles.header}>
         <div className={styles.container}>

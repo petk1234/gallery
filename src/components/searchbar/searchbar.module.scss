@@ -12,10 +12,8 @@
   z-index: 7;
 }
 .form {
-  //   position: fixed;
   width: 90%;
   z-index: 7;
-  //   background-color: #fff;
   display: flex;
   position: relative;
   justify-content: space-around;
@@ -27,15 +25,19 @@
     border-radius: 10px;
     border: none;
     position: relative;
-    // background-color: red;
     outline: none;
+    font-size: 16px;
+    padding-left: 15px;
   }
   &__searchButton {
-    background: url("../images/galleryItem/search.svg") center no-repeat;
+    background: url("../../images/galleryItem/search.svg") center no-repeat;
     background-size: 20px 20px;
     height: 50px;
     width: 50px;
     border: none;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__radioButtons {
     display: none;
@@ -49,6 +51,7 @@
     border: 1px solid rgb(243, 237, 237);
     border-radius: 10px;
     width: 150px;
+    font-size: 16px;
   }
   &__visible {
     display: flex;
@@ -64,7 +67,6 @@
     padding-right: 13px;
     &:hover {
       color: #fff;
-      //   background-color: ;
     }
   }
   &__button {
@@ -75,9 +77,11 @@
     width: 150px;
     border-radius: 10px;
     right: 0;
+    font-size: 16px;
     border: none;
     &:hover {
       color: rgb(194, 194, 194);
+      cursor: pointer;
     }
   }
 }

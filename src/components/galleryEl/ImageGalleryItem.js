@@ -3,7 +3,7 @@ import Modal from "../modal/Modal";
 import React from "react";
 import styles from "./imageGallery.module.scss";
 import ImageInfoContainer from "../imageInfoContainer/ImageInfoContainer";
-import withContext from "../withContext";
+import withContext from "../../withContext";
 import ContentLoader from "../contentLoader/ContentLoader";
 import PropTypes, { array } from "prop-types";
 class ImageGalleryItem extends Component {

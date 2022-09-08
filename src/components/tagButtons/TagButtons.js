@@ -1,4 +1,4 @@
-import withContext from "../withContext";
+import withContext from "../../withContext";
 import { Component } from "react";
 import styles from "./tagButtons.module.scss";
 import PropTypes, { array } from "prop-types";
